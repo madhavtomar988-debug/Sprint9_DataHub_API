@@ -1,8 +1,14 @@
 const express = require("express");
+require("dotenv").config();
+const mongoose = require("mongoose");
 
 const app = express();
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch((err) => console.log(err));
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.use(express.json());
 
 app.use((req, res, next) => {
